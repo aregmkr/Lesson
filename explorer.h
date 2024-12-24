@@ -7,6 +7,8 @@
 #include <QScrollArea>
 #include <QDir>
 #include <QStringList>
+#include "cell.h"
+#include <QGridLayout>
 
 class Explorer : public QWidget
 {
@@ -33,16 +35,23 @@ private:
     QScrollArea* scroll;
 
     QWidget* scroll_content;
+
+    QStringList history_dir_names;
+
+    QVector<Cell*> cells_array;
+
+    QGridLayout* cells_layout;
+    QScrollArea* for_layout;
 private slots:
     void open_folder(QString path);
+    void open_file(QString path);
     void handle_next();
     void handle_prev();
+    void handle_box(int index);
 
 private:
     void show_dirs();
-
-private:
-    QStringList dirs_names;
+    void cell_manager(QString path);
 };
 
 #endif // EXPLORER_H
